@@ -12,44 +12,6 @@ resource "aws_cloud9_environment_ec2" "lab" {
   owner_arn                   = aws_iam_user.studentname.arn
   automatic_stop_time_minutes = var.automatic_cloud9_stop_time_minutes
   # subnet_id                   = data.aws_subnet.cloud9_subnet.id
-  #depends_on                  = [aws_vpc.cloud9_vpc, data.aws_subnet.cloud9_subnet, aws_subnet.cloud9_subnet]
-
-}
-
-resource "aws_vpc" "cloud9_vpc" {
-  cidr_block           = "10.10.0.0/20"
-  instance_tenancy     = "default"
-  enable_dns_support   = true
-  enable_dns_hostnames = true
-
-  tags = {
-    Name = "cloud9_vpc"
-  }
-}
-
-resource "aws_subnet" "cloud9_subnet" {
-  vpc_id                  = aws_vpc.cloud9_vpc.id
-  cidr_block              = "10.10.10.0/24"
-  availability_zone       = data.aws_availability_zones.available.names[0]
-  map_public_ip_on_launch = true
-  depends_on              = [aws_vpc.cloud9_vpc]
-  tags = {
-    Name = "cloud9-subnet"
-  }
-}
-
-
-data "aws_subnet" "cloud9_subnet" {
-  vpc_id     = aws_vpc.cloud9_vpc.id
-  depends_on = [aws_subnet.cloud9_subnet]
-}
-
-data "aws_availability_zones" "available" {
-  state = "available"
-}
-
-output "vpc_id" {
-  value = aws_vpc.cloud9_vpc
 
 }
 
