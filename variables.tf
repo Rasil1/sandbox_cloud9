@@ -1,7 +1,7 @@
 variable "region" {
   description = "default region"
   type        = string
-  default     = "us-east-2"
+  default     = "us-west-1"
 }
 
 variable "studentname" {
@@ -26,21 +26,11 @@ variable "automatic_cloud9_stop_time_minutes" {
   type        = number
   default     = 30
 }
-variable "policy_arns1" {
-  description = "ARN of policy to be associated with the created IAM user group"
-  type        = string
-  default     = "arn:aws:iam::aws:policy/job-function/SystemAdministrator"
-}
-variable "policy_arns2" {
-  description = "ARN of policy to be associated with the created IAM user group"
-  type        = string
-  default     = "arn:aws:iam::aws:policy/AWSCloud9User"
-}
-/*
+
 variable "policy_arns" {
-  description = "The list of ARNs of policies directly assigned to the IAM user"
+  description = "The list of ARNs of policies directly assigned to the IAM group"
   type        = list(string)
-  default     = ["arn:aws:iam::aws:policy/AWSCloud9User", "arn:aws:iam::aws:policy/job-function/SystemAdministrator"]
-}*/
+  default     = ["arn:aws:iam::aws:policy/AWSCloud9User", "arn:aws:iam::aws:policy/job-function/SystemAdministrator", "arn:aws:iam::aws:policy/IAMUserChangePassword"]
+}
 
 
