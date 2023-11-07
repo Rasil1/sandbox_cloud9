@@ -11,7 +11,7 @@ resource "aws_cloud9_environment_ec2" "lab" {
   image_id                    = var.cloud9imageid
   owner_arn                   = aws_iam_user.studentname.arn
   automatic_stop_time_minutes = var.automatic_cloud9_stop_time_minutes
-  # subnet_id                   = data.aws_subnet.cloud9_subnet.id
+
 
 }
 
@@ -21,7 +21,12 @@ data "aws_instance" "cloud9_instance" {
     values = [aws_cloud9_environment_ec2.lab.id]
   }
 }
+resource "aws_default_vpc" "default" {
+  tags = {
+    name = "test_default_vpc"
+  }
 
+}
 resource "aws_iam_user" "studentname" {
   name = var.studentname
 }

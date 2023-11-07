@@ -11,7 +11,7 @@ variable "studentname" {
 }
 
 variable "cloud9_instance_type" {
-  description = "cloud9 instance size"
+  description = "cloud9 instance size possible options t2.micro t3.small m5.large"
   type        = string
   default     = "t2.micro"
 }
