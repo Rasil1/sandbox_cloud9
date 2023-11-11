@@ -32,7 +32,9 @@ resource "aws_iam_user" "studentname" {
 }
 
 resource "aws_iam_user_login_profile" "student_user_login_profile" {
-  user                    = aws_iam_user.studentname.name
+  user    = aws_iam_user.studentname.name
+  pgp_key = var.admin_pgp_key
+
   password_reset_required = true
 }
 
@@ -53,7 +55,7 @@ resource "aws_iam_group_policy_attachment" "policy_attachment" {
 }
 
 output "student_name" {
-  value = aws_iam_user.studentname
+  value = aws_iam_user.studentname.name
 }
 
 output "cloud9_url" {
@@ -66,4 +68,7 @@ output "student_ARN" {
 output "machine_ARN" {
   value = aws_cloud9_environment_ec2.lab.arn
 }
-
+output "student_password" {
+  value = aws_iam_user_login_profile.student_user_login_profile
+  #the encrypted password may be decrypted using the command line, for example: terraform output password | base64 --decode | keybase pgp decrypt.
+}

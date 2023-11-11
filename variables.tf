@@ -7,9 +7,13 @@ variable "region" {
 variable "studentname" {
   description = "The name of the user"
   type        = string
-  default     = "student"
+  default     = "student2"
 }
-
+variable "admin_pgp_key" {
+  description = "pgp key to encrypt password "
+  type        = string
+  #default = "keybase:example" #keybase:example --example means the account name of the user with the pgp key at https://keybase.io/
+}
 variable "cloud9_instance_type" {
   description = "cloud9 instance size possible options t2.micro t3.small m5.large"
   type        = string
